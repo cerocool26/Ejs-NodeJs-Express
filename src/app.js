@@ -22,7 +22,6 @@ app.use(indexRoutes)
 //Static files
 app.use(express.static(join(__dirname,'public')))
 
-
 //listening the server
 app.listen(app.get("port"));
 console.log("Server on port", app.get("port"));
