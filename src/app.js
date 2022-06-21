@@ -15,6 +15,6 @@ app.use(express.static(join(__dirname,'public')))
 
 
 
-app.listen(port, () => {
-    console.log(`App escuchando en el puerto ${port}`)
+app.listen(process.env.port || port, () => {
+    console.log('App escuchando en el puerto',process.env.port || port)
 })
