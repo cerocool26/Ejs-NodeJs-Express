@@ -1,20 +1,28 @@
 import express from 'express'
+import morgan from "morgan";
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import indexRoutes from './routes/index.js'
 
+// Initialize express
 const app = express()
-const port = 3000
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// settings
+app.set("port", process.env.PORT || 3000);
 app.set('views', join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
+// middlewares
+app.use(morgan("dev"));
+
+// Routes
 app.use(indexRoutes)
+
+//Static files
 app.use(express.static(join(__dirname,'public')))
 
 
-
-app.listen(process.env.port || port, () => {
-    console.log('App escuchando en el puerto',process.env.port || port)
-})
+//listening the server
+app.listen(app.get("port"));
+console.log("Server on port", app.get("port"));
